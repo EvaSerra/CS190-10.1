@@ -24,13 +24,24 @@ public class Main extends Application {
         header.setAlignment(Pos.CENTER);
 
         Label status = new Label("Ready");
+
         TextField message = new TextField();
         message.setPromptText("Enter Message");
+        message.setMinWidth(400);
+        message.isResizable();
+
         Label prompt = new Label("Write your message: ");
+
         Button addBtn = new Button("Add");
+        addBtn.setMinWidth(40);
+
         Button resetBtn = new Button("Reset");
+
         TextArea messagesLog = new TextArea();
+        messagesLog.setMinSize(400,300);
         messagesLog.setEditable(false);
+        messagesLog.isResizable();
+
 
         Label wordCount = new Label("");
         // - If input text is empty or blank: set status to "Nothing to add" and return.
@@ -58,19 +69,28 @@ public class Main extends Application {
             wordCount.setText("");
         });
 
-        HBox buttonBar = new HBox( 40, addBtn, resetBtn);
-        buttonBar.setAlignment(Pos.CENTER);
+//        HBox buttonBar = new HBox( 40, addBtn, resetBtn);
+//        buttonBar.setAlignment(Pos.CENTER);
+//        VBox topContainer = new VBox(20, header, status);
+//        VBox messagesBox =  new VBox(20, messagesLog, prompt, message, wordCount);
+//        messagesBox.setAlignment(Pos.CENTER);
+//        BorderPane root = new BorderPane();
+//        root.setTop(topContainer);
+//        root.setCenter(messagesBox);
+//        root.setBottom(buttonBar);
+
+        HBox textInandButton = new HBox(20, message, addBtn);
         VBox topContainer = new VBox(20, header, status);
-        VBox messagesBox =  new VBox(20, messagesLog, prompt, message, wordCount);
-        messagesBox.setAlignment(Pos.CENTER);
+        VBox middleContainer = new VBox(20, prompt, textInandButton, wordCount);
+        VBox bottomContainer = new VBox(20, resetBtn, messagesLog);
         BorderPane root = new BorderPane();
         root.setTop(topContainer);
-        root.setCenter(messagesBox);
-        root.setBottom(buttonBar);
+        root.setCenter(middleContainer);
+        root.setBottom(bottomContainer);
 
-        Scene scene = new Scene(root, 450, 300);
-        stage.setMinWidth(400);
-        stage.setMinHeight(250);
+        Scene scene = new Scene(root, 500, 400);
+        stage.setMinWidth(500);
+        stage.setMinHeight(400);
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Message Board");
